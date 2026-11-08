@@ -6,12 +6,21 @@ from dotenv import load_dotenv
 _ENV_PATH = Path(__file__).resolve().parent / ".env"
 load_dotenv(_ENV_PATH)
 
-BASE_URL = os.getenv(
-    "BASE_URL",
-    "https://bsv-nhungnguyen.github.io/bai_tap_17082026.html",
-).strip()
 
-ADMIN_USER = os.getenv("ADMIN_USER", "admin")
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
-GUEST_USER = os.getenv("GUEST_USER", "guest")
-GUEST_PASSWORD = os.getenv("GUEST_PASSWORD", "guest123")
+def _require(name: str) -> str:
+    """Read a required value from .env — credentials are never hardcoded in the repo."""
+    value = os.getenv(name, "").strip()
+    if not value:
+        raise RuntimeError(
+            f"Missing '{name}'. Copy .env.example to .env and fill in the value "
+            f"(see README → Environment)."
+        )
+    return value
+
+
+BASE_URL = _require("BASE_URL")
+
+ADMIN_USER = _require("ADMIN_USER")
+ADMIN_PASSWORD = _require("ADMIN_PASSWORD")
+GUEST_USER = _require("GUEST_USER")
+GUEST_PASSWORD = _require("GUEST_PASSWORD")

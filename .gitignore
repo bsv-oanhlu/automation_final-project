@@ -218,3 +218,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---------------------------------------------------------------------------
+# Test reports / artifacts — generated on each run, never push to GitHub
+# ---------------------------------------------------------------------------
+# Allure raw results (pytest --alluredir)
+/allure-results/
+# Allure HTML report (allure generate ... --single-file)
+/allure-report/
+# pytest-playwright output (screenshots / videos / traces)
+/test-results/
+
+# macOS Finder metadata (only on MacBook)
+.DS_Store
